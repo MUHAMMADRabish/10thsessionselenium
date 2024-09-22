@@ -23,21 +23,23 @@ public class Reusable {
   @BeforeMethod
   @Parameters({"browsers","Website"})
   public void beforeMethod(String browser, String websites) throws InterruptedException {
+	String paths= System.getProperty("user.dir");
 	  if(browser.equalsIgnoreCase("Chrome")){
-		  System.setProperty("webdriver.chrome.driver", "C:\\Users\\Owner\\eclipse-workspace\\Students\\Drivers\\chromedriver.exe");
+		  System.setProperty("webdriver.chrome.driver", paths+"\\Drivers\\chromedriver.exe");
 			 driver=new ChromeDriver();
 			 driver.get(websites);
 			 Thread.sleep(6000);
 			 driver.manage().window().maximize();
+			 System.out.println(paths);
 		  }else if(browser.equalsIgnoreCase("Edge")){
-			 System.setProperty("webdriver.edge.driver", "C:\\Users\\Owner\\eclipse-workspace\\Students\\Drivers\\msedgedriver.exe");
+			 System.setProperty("webdriver.edge.driver", paths+"\\Drivers\\msedgedriver.exe");
 			 driver=new EdgeDriver();
 			 driver.get(websites);
 			 Thread.sleep(6000);
 			 driver.manage().window().maximize();
 
 		  }else if(browser.equalsIgnoreCase("Firefox")) {
-			  System.setProperty("webdriver.gecko.driver","C:\\Users\\Owner\\eclipse-workspace\\Students\\Drivers\\geckodriver.exe");
+			  System.setProperty("webdriver.gecko.driver",paths+"\\Drivers\\geckodriver.exe");
 			  driver=new FirefoxDriver();
 		  driver.get(websites);
 			  Thread.sleep(6000);
@@ -54,9 +56,10 @@ public class Reusable {
   public void screenshots() throws IOException {
 	  Date dt=new Date();
 	  String jk=dt.toString().replace(" ", "_").replace(":", "_");
+	  String paths= System.getProperty("user.dir");
 	  System.out.println(jk);
 	  File capture=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-	  FileHandler.copy(capture, new File("C:\\Users\\Owner\\eclipse-workspace\\Students\\Pictures\\"+jk+"output.jpg"));
+	  FileHandler.copy(capture, new File(paths+"\\Pictures\\"+jk+"output.jpg"));
   }
   
 
